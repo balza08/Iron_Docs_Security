@@ -10,11 +10,7 @@ from .models import Documentazione, ProfiloUtente
 
 import io
 
-
-# -------------------------
 # AUTH / PAGINE
-# -------------------------
-
 def login_view(request):
     errore = None
     if request.method == "POST":
@@ -59,11 +55,7 @@ def logout_view(request):
     logout(request)  # Cancella i cookie di sessione dal browser fondamentale!!
     return redirect("login")
 
-
-# -------------------------
 # HOME
-# -------------------------
-
 def home(request):
     if request.user.is_authenticated:
         docs = Documentazione.objects.filter(user=request.user)
@@ -72,10 +64,11 @@ def home(request):
 
     return render(request, "home.html", {"docs": docs})
 
-
-# -------------------------
 # DOCUMENTI
-# -------------------------
+@login_required #obbligo a passare sempre prima dal login
+def home(request):
+    docs = Documentazione.objects.filter(user=request.user)
+    return render(request, "home.html", {"docs": docs})
 
 @login_required
 def nuova_doc(request):
@@ -94,11 +87,7 @@ def elimina_doc(request, doc_id):
     doc.delete()
     return redirect("home")
 
-
-# -------------------------
 # DOWNLOAD TXT
-# -------------------------
-
 @login_required
 def scarica_txt(request, doc_id):
 
@@ -116,11 +105,7 @@ def scarica_txt(request, doc_id):
     response["Content-Disposition"] = f'attachment; filename="{doc.titolo}.txt"'
     return response
 
-
-# -------------------------
 # DOWNLOAD PDF
-# -------------------------
-
 @login_required
 def scarica_pdf(request, doc_id):
 
