@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .box { border: 1px solid #00ff41; padding: 40px; width: 500px; }
+        h2 { text-align: center; margin-bottom: 20px; letter-spacing: 3px; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0; background: #0a0a0a; border: 1px solid #00ff41; color: #00ff41; font-family: 'Courier New', monospace; font-size: 14px; }
+        textarea { height: 120px; resize: vertical; }
+        button { width: 100%; padding: 10px; margin-top: 10px; background: #00ff41; color: #0a0a0a; border: none; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #00cc33; }
+        .errore { color: #ff0000; margin-top: 10px; text-align: center; }
+        .link { text-align: center; margin-top: 15px; }
+        a { color: #00ff41; }
+        label { font-size: 12px; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>[ REGISTER ]</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label>USERNAME:</label>
+            <input type="text" name="username" required>
+            <label>PASSWORD:</label>
+            <input type="password" name="password" required>
+            <label>FIRMA ASCII (la tua intestazione):</label>
+            <textarea name="firma_ascii" placeholder="Incolla qui la tua firma ASCII..."></textarea>
+            <button type="submit">&gt; REGISTRATI</button>
+        </form>
+        {% if errore %}<p class="errore">[!] {{ errore }}</p>{% endif %}
+        <div class="link">Hai già un account? <a href="{% url 'login' %}">&gt; LOGIN</a></div>
+    </div>
+</body>
+</html>

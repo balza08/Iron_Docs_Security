@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuova Doc</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; padding: 30px; }
+        h1 { letter-spacing: 3px; margin-bottom: 20px; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0; background: #0a0a0a; border: 1px solid #00ff41; color: #00ff41; font-family: 'Courier New', monospace; font-size: 14px; }
+        textarea { height: 400px; resize: vertical; }
+        .firma { height: 150px; color: #008f11; margin-bottom: 10px; }
+        button { padding: 10px 30px; margin-top: 10px; background: #00ff41; color: #0a0a0a; border: none; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #00cc33; }
+        .btn-back { display: inline-block; padding: 8px 20px; border: 1px solid #00ff41; color: #00ff41; text-decoration: none; margin-left: 10px; }
+        label { font-size: 12px; letter-spacing: 2px; color: #008f11; }
+    </style>
+</head>
+<body>
+    <h1>[ NEW DOCUMENT ]</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>INTESTAZIONE (firma):</label>
+        <textarea class="firma" readonly>{{ firma }}</textarea>
+        <label>TITOLO:</label>
+        <input type="text" name="titolo" required>
+        <label>CONTENUTO:</label>
+        <textarea name="contenuto" placeholder="Scrivi la tua documentazione..."></textarea>
+        <button type="submit">&gt; SALVA</button>
+        <a href="{% url 'home' %}" class="btn-back">&gt; ANNULLA</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; padding: 30px; }
+        h1 { letter-spacing: 3px; margin-bottom: 5px; }
+        .subtitle { color: #008f11; margin-bottom: 30px; }
+        .btn { display: inline-block; padding: 8px 20px; border: 1px solid #00ff41; color: #00ff41; text-decoration: none; font-family: 'Courier New', monospace; margin-bottom: 20px; }
+        .btn:hover { background: #00ff41; color: #0a0a0a; }
+        .btn-red { border-color: #ff0000; color: #ff0000; margin-left: 10px; }
+        .btn-red:hover { background: #ff0000; color: #0a0a0a; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th { text-align: left; padding: 10px; border-bottom: 1px solid #00ff41; color: #008f11; letter-spacing: 2px; }
+        td { padding: 10px; border-bottom: 1px solid #003b00; }
+        tr:hover td { background: #001a00; }
+        a { color: #00ff41; text-decoration: none; }
+        .empty { color: #008f11; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>[ DOCUMENTATION VAULT ]</h1>
+    <p class="subtitle">&gt; Logged as: {{ request.user.username }}</p>
+
+    <a href="{% url 'nuova_doc' %}" class="btn">&gt; NEW DOCUMENT</a>
+    <a href="{% url 'logout' %}" class="btn btn-red">&gt; LOGOUT</a>
+
+    {% if docs %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>TITOLO</th>
+            <th>DATA</th>
+            <th>AZIONI</th>
+        </tr>
+        {% for doc in docs %}
+        <tr>
+            <td>[{{ doc.id }}]</td>
+            <td><a href="{% url 'visualizza_doc' doc.id %}">&gt; {{ doc.titolo }}</a></td>
+            <td>{{ doc.creata_il|date:"d/m/Y H:i" }}</td>
+            <td><a href="{% url 'elimina_doc' doc.id %}" class="btn-red" onclick="return confirm('Eliminare?')">&gt; DELETE</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="empty">[!] Nessuna documentazione trovata. Crea il tuo primo documento!</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ doc.titolo }}</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; padding: 30px; }
+        h1 { letter-spacing: 3px; margin-bottom: 5px; }
+        .meta { color: #008f11; margin-bottom: 20px; font-size: 12px; }
+        .firma { white-space: pre; color: #008f11; margin-bottom: 20px; border-bottom: 1px solid #003b00; padding-bottom: 20px; }
+        .contenuto { white-space: pre-wrap; line-height: 1.6; }
+        .btn { display: inline-block; padding: 8px 20px; border: 1px solid #00ff41; color: #00ff41; text-decoration: none; margin-top: 20px; }
+        .btn:hover { background: #00ff41; color: #0a0a0a; }
+        .btn-red { border-color: #ff0000; color: #ff0000; margin-left: 10px; }
+        .btn-red:hover { background: #ff0000; color: #0a0a0a; }
+    </style>
+</head>
+<body>
+    <div class="firma">{{ firma }}</div>
+    <h1>&gt; {{ doc.titolo }}</h1>
+    <p class="meta">[DATE: {{ doc.creata_il|date:"d/m/Y H:i" }}] [AUTHOR: {{ request.user.username }}]</p>
+    <div class="contenuto">{{ doc.contenuto }}</div>
+    <a href="{% url 'home' %}" class="btn">&gt; BACK</a>
+    <a href="{% url 'scarica_txt' doc.id %}" class="btn">&gt; DOWNLOAD TXT</a>
+    <a href="{% url 'scarica_pdf' doc.id %}" class="btn">&gt; DOWNLOAD PDF</a>
+    <a href="{% url 'elimina_doc' doc.id %}" class="btn btn-red" onclick="return confirm('Eliminare?')">&gt; DELETE</a>
+</body>
+</html>
