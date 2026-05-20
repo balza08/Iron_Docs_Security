@@ -2,11 +2,16 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Docs Security - Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0b0f19;
+            background-image: 
+                linear-gradient(rgba(11, 15, 25, 0.8), rgba(11, 15, 25, 0.8)),
+                radial-gradient(#1e293b 1px, transparent 0);
+            background-size: 24px 24px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -14,20 +19,44 @@
             margin: 0;
         }
         .box {
-            background: white;
+            background: rgba(17, 24, 39, 0.85);
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 300px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5),
+                        0 0 15px rgba(0, 212, 255, 0.05);
+            width: 320px;
+            box-sizing: border-box;
+            backdrop-filter: blur(8px);
         }
-        h2 { text-align: center; color: #333; }
+        h2 { 
+            text-align: center; 
+            color: #ffffff; 
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
         input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px;
+            margin: 12px 0;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 6px;
             box-sizing: border-box;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
+            background: #111827;
         }
         button {
             width: 100%;
