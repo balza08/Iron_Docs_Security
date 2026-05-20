@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 
@@ -15,14 +16,47 @@ import io
 # -------------------------
 
 def login_view(request):
-    return render(request, "login.html")
+    errore = None
+    if request.method == "POST":
+        username_input = request.POST.get("username")
+        password_input = request.POST.get("password")
+        
+        # Controlla se l'utente esiste e la password è corretta
+        user = authenticate(request, username=username_input, password=password_input)
+        
+        if user is not None:
+            login(request, user)  # Crea la sessione
+            return redirect("home")  # Vai alla home
+        else:
+            errore = "Credenziali non valide. Accesso negato."
+            
+    return render(request, "login.html", {"errore": errore})
 
 
 def register_view(request):
-    return render(request, "register.html")
+    errore = None
+    if request.method == "POST":
+        username_input = request.POST.get("username")
+        password_input = request.POST.get("password")
+        firma_input = request.POST.get("firma_ascii", "") # Prende la firma dal form
+        
+        if User.objects.filter(username=username_input).exists():
+            errore = "Questo username è già registrato nel sistema."
+        else:
+            # Crea l'utente criptando la password
+            user = User.objects.create_user(username=username_input, password=password_input)
+            
+            # Salva la Firma ASCII nel tuo modello collegato
+            ProfiloUtente.objects.create(user=user, firma_ascii=firma_input)
+            
+            login(request, user)  # Logga l'utente automaticamente
+            return redirect("home")
+
+    return render(request, "register.html", {"errore": errore})
 
 
 def logout_view(request):
+    logout(request)  # Cancella i cookie di sessione dal browser fondamentale!!
     return redirect("login")
 
 
