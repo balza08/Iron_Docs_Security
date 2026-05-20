@@ -2,37 +2,179 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Registrazione</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Docs Security - Registrazione</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .box { border: 1px solid #00ff41; padding: 40px; width: 500px; }
-        h2 { text-align: center; margin-bottom: 20px; letter-spacing: 3px; }
-        input, textarea { width: 100%; padding: 10px; margin: 8px 0; background: #0a0a0a; border: 1px solid #00ff41; color: #00ff41; font-family: 'Courier New', monospace; font-size: 14px; }
-        textarea { height: 120px; resize: vertical; }
-        button { width: 100%; padding: 10px; margin-top: 10px; background: #00ff41; color: #0a0a0a; border: none; font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; cursor: pointer; }
-        button:hover { background: #00cc33; }
-        .errore { color: #ff0000; margin-top: 10px; text-align: center; }
-        .link { text-align: center; margin-top: 15px; }
-        a { color: #00ff41; }
-        label { font-size: 12px; letter-spacing: 2px; }
+        
+        /* Sfondo scuro tech coerente con la pagina di login */
+        body { 
+            background-color: #0b0f19; 
+            background-image: 
+                linear-gradient(rgba(11, 15, 25, 0.8), rgba(11, 15, 25, 0.8)),
+                radial-gradient(#1e293b 1px, transparent 0);
+            background-size: 24px 24px;
+            color: #ffffff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        }
+        
+        /* Box blindato in vetro scuro (Glassmorphism) */
+        .box { 
+            background: rgba(17, 24, 39, 0.85);
+            padding: 40px; 
+            width: 480px; 
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5),
+                        0 0 15px rgba(0, 212, 255, 0.05);
+            backdrop-filter: blur(8px);
+        }
+        
+        /* Titolo stilizzato */
+        h2 { 
+            text-align: center; 
+            margin-bottom: 25px; 
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Etichette dei campi in stile tech */
+        label { 
+            display: block;
+            font-size: 11px; 
+            font-weight: bold;
+            letter-spacing: 1.5px; 
+            color: #00d4ff;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        /* Input e Textarea scuri con focus azzurrato */
+        input, textarea { 
+            width: 100%; 
+            padding: 12px; 
+            background: #1f2937; 
+            border: 1px solid #374151; 
+            border-radius: 6px;
+            color: #ffffff; 
+            font-size: 14px; 
+            transition: all 0.3s ease;
+        }
+
+        /* Manteniamo il font monospace solo per la Firma ASCII, così si allinea perfettamente! */
+        textarea { 
+            height: 100px; 
+            resize: none; 
+            font-family: 'Courier New', monospace; 
+            font-size: 13px;
+            background: #111827; /* Leggermente più scura per simulare un terminale */
+            border-color: rgba(0, 212, 255, 0.1);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: #6b7280;
+        }
+
+        /* Effetto Focus Cyber-Azzurro */
+        input:focus, textarea:focus { 
+            outline: none; 
+            border-color: #00d4ff; 
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
+            background: #111827;
+        }
+        
+        /* Bottone con gradiente azzurro/blu */
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 25px; 
+            background: linear-gradient(135deg, #0072ff, #00d4ff); 
+            color: white; 
+            border: none; 
+            border-radius: 6px;
+            font-size: 15px; 
+            font-weight: bold; 
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+        }
+        
+        button:hover { 
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Messaggio di errore cyber-rosso */
+        .errore { 
+            color: #ef4444; 
+            margin-top: 15px; 
+            text-align: center; 
+            font-size: 14px;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        
+        /* Link di ritorno al Login */
+        .link { 
+            text-align: center; 
+            margin-top: 20px; 
+            color: #9ca3af;
+            font-size: 14px;
+        }
+        
+        a { 
+            color: #00d4ff; 
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover { 
+            color: #0072ff;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="box">
-        <h2>[ REGISTER ]</h2>
+        <h2>Nuovo Profilo</h2>
         <form method="POST">
             {% csrf_token %}
-            <label>USERNAME:</label>
-            <input type="text" name="username" required>
-            <label>PASSWORD:</label>
-            <input type="password" name="password" required>
-            <label>FIRMA ASCII (la tua intestazione):</label>
-            <textarea name="firma_ascii" placeholder="Incolla qui la tua firma ASCII..."></textarea>
-            <button type="submit">&gt; REGISTRATI</button>
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Inserisci username" required>
+            
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Crea una password sicura" required>
+            
+            <label>Firma ASCII (Intestazione Terminale)</label>
+            <textarea name="firma_ascii" placeholder="[ Incolla qui il tuo codice o testo ASCII... ]"></textarea>
+            
+            <button type="submit">Crea Account</button>
         </form>
-        {% if errore %}<p class="errore">[!] {{ errore }}</p>{% endif %}
-        <div class="link">Hai già un account? <a href="{% url 'login' %}">&gt; LOGIN</a></div>
+        
+        {% if errore %}
+            <p class="errore">[!] {{ errore }}</p>
+        {% endif %}
+        
+        <div class="link">Hai già un account? <a href="{% url 'login' %}">Accedi</a></div>
     </div>
 </body>
 </html>
