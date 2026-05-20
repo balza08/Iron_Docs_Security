@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iron Docs Security - Login</title>
     <style>
+        /* Sfondo scuro tech con texture a micro-griglia (stile fibra di carbonio) */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0b0f19;
+            background-color: #0b0f19;
             background-image: 
                 linear-gradient(rgba(11, 15, 25, 0.8), rgba(11, 15, 25, 0.8)),
                 radial-gradient(#1e293b 1px, transparent 0);
@@ -18,6 +19,8 @@
             height: 100vh;
             margin: 0;
         }
+
+        /* Box blindato con effetto vetro scuro (Glassmorphism) e bordo azzurro */
         .box {
             background: rgba(17, 24, 39, 0.85);
             padding: 40px;
@@ -29,6 +32,8 @@
             box-sizing: border-box;
             backdrop-filter: blur(8px);
         }
+
+        /* Titolo stilizzato Iron Docs */
         h2 { 
             text-align: center; 
             color: #ffffff; 
@@ -38,8 +43,11 @@
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
+            /* Effetto leggermente metallico/neon */
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
+
+        /* Input moderni e scuri, cambiano colore al focus */
         input {
             width: 100%;
             padding: 12px;
@@ -52,35 +60,89 @@
             font-size: 14px;
             transition: all 0.3s ease;
         }
+
+        input::placeholder {
+            color: #9ca3af;
+        }
+
+        /* Focus cyber-azzurro */
         input:focus {
             outline: none;
             border-color: #00d4ff;
             box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
             background: #111827;
         }
+
+        /* Bottone "Iron" in azzurro/blu elettrico con transizione morbida */
         button {
             width: 100%;
-            padding: 10px;
-            background: #4CAF50;
+            padding: 12px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #0072ff, #00d4ff);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
         }
-        button:hover { background: #45a049; }
-        .errore { color: red; text-align: center; margin-top: 10px; }
+
+        button:hover { 
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        /* Link di registrazione in basso */
+        .link {
+            text-align: center; 
+            margin-top: 20px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .link a:hover {
+            color: #0072ff;
+            text-decoration: underline;
+        }
+
+        /* Messaggio di errore cyber-rosso */
+        .errore { 
+            color: #ef4444; 
+            text-align: center; 
+            margin-top: 15px; 
+            font-size: 14px;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
     </style>
 </head>
 <body>
     <div class="box">
-        <h2>Login</h2>
+        <h2>Iron Docs</h2>
         <form method="POST">
             {% csrf_token %}
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Accedi</button>
-            <div class="link" style="text-align:center; margin-top:15px;">
+            <div class="link">
                 Non hai un account? <a href="{% url 'register' %}">Registrati</a>
             </div>
         </form>
