@@ -12,6 +12,13 @@ import io
 
 # AUTH / PAGINE
 def login_view(request):
+    import os
+    from django.contrib.auth.models import User
+    ADMIN_USER = os.environ.get('DJANGO_SUPERUSER_USERNAME')
+    ADMIN_PASS = os.environ.get('DJANGO_SUPERUSER_PASSWORD')
+    if ADMIN_USER and ADMIN_PASS:
+        if not User.objects.filter(username=ADMIN_USER).exists():
+            User.objects.create_superuser(ADMIN_USER, 'balzap08@gmail.com', ADMIN_PASS)
     errore = None
     if request.method == "POST":
         username_input = request.POST.get("username")
