@@ -72,6 +72,16 @@ def home(request):
 
 @login_required
 def nuova_doc(request):
+    if request.method == "POST":
+        titolo_input = request.POST.get("titolo")
+        contenuto_input = request.POST.get("contenuto")
+        if titolo_input and contenuto_input:
+            Documentazione.objects.create(
+                user=request.user,
+                titolo=titolo_input,
+                contenuto=contenuto_input
+            )
+            return redirect("home")
     return render(request, "nuova_doc.html")
 
 
