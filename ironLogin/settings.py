@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-jv6^n-acta+#l!1=h95q61bqi2iad3q=xcotgzp2oadp@&h)c3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['irondocs.onrender.com', 'localhost', '127.0.0.1', '.onrender.com']
 
 
 # Application definition
@@ -119,4 +119,3 @@ STATIC_URL = 'static/'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
-ALLOWED_HOSTS = []
